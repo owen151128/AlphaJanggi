@@ -7,8 +7,9 @@ import torch.nn as nn
 from lib import game, mcts, webFunction, actionTable
 
 
-NUM_FILTERS = 256
+NUM_FILTERS = 128
 OBS_SHAPE = (15, game.GAME_ROWS, game.GAME_COLS)
+resBlockNum = 1
 
 class Net(nn.Module):
     def __init__(self, input_shape, actions_n):
@@ -17,126 +18,12 @@ class Net(nn.Module):
         self.conv_in = nn.Sequential(
             nn.Conv2d(input_shape[0], NUM_FILTERS, kernel_size=3, padding=1),
             nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_1 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_2 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_3 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_4 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_5 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_6 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_7 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_8 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_9 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_10 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_11 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_12 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_13 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_14 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_15 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_16 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_17 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_18 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_19 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_20 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_21 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_22 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_23 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_24 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_25 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_26 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_27 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_28 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_29 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_30 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_31 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_32 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_33 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_34 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_35 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_36 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_37 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_38 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_39 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
-        self.conv_40 = nn.Sequential(
-                nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
-                nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
+
+        res_block = nn.Sequential(
+            nn.Conv2d(NUM_FILTERS, NUM_FILTERS, kernel_size=3, padding=1),
+            nn.BatchNorm2d(NUM_FILTERS), nn.LeakyReLU())
+
+        self.blocks = nn.ModuleList([res_block for _ in range(resBlockNum)])
 
         body_out_shape = (NUM_FILTERS, ) + input_shape[1:]
 
@@ -154,8 +41,8 @@ class Net(nn.Module):
         )
 
         self.conv_policy = nn.Sequential(
-            nn.Conv2d(NUM_FILTERS, 4, kernel_size=1),
-            nn.BatchNorm2d(4),
+            nn.Conv2d(NUM_FILTERS, 32, kernel_size=1),
+            nn.BatchNorm2d(32),
             nn.LeakyReLU()
         )
         conv_policy_size = self._get_conv_policy_size(body_out_shape)
@@ -174,46 +61,8 @@ class Net(nn.Module):
     def forward(self, x):
         batch_size = x.size()[0]
         v = self.conv_in(x)
-        v = v + self.conv_1(v)
-        v = v + self.conv_2(v)
-        v = v + self.conv_3(v)
-        v = v + self.conv_4(v)
-        v = v + self.conv_5(v)
-        v = v + self.conv_6(v)
-        v = v + self.conv_7(v)
-        v = v + self.conv_8(v)
-        v = v + self.conv_9(v)
-        v = v + self.conv_10(v)
-        v = v + self.conv_11(v)
-        v = v + self.conv_12(v)
-        v = v + self.conv_13(v)
-        v = v + self.conv_14(v)
-        v = v + self.conv_15(v)
-        v = v + self.conv_16(v)
-        v = v + self.conv_17(v)
-        v = v + self.conv_18(v)
-        v = v + self.conv_19(v)
-        v = v + self.conv_20(v)
-        v = v + self.conv_21(v)
-        v = v + self.conv_22(v)
-        v = v + self.conv_23(v)
-        v = v + self.conv_24(v)
-        v = v + self.conv_25(v)
-        v = v + self.conv_26(v)
-        v = v + self.conv_27(v)
-        v = v + self.conv_28(v)
-        v = v + self.conv_29(v)
-        v = v + self.conv_30(v)
-        v = v + self.conv_31(v)
-        v = v + self.conv_32(v)
-        v = v + self.conv_33(v)
-        v = v + self.conv_34(v)
-        v = v + self.conv_35(v)
-        v = v + self.conv_36(v)
-        v = v + self.conv_37(v)
-        v = v + self.conv_38(v)
-        v = v + self.conv_39(v)
-        v = v + self.conv_40(v)
+        for block in self.blocks:
+            v = v + block(v)
         val = self.conv_val(v)
         val = self.value(val.view(batch_size, -1))
         pol = self.conv_policy(v)
@@ -274,7 +123,7 @@ def play_game(value, mcts_stores, queue, net1, net2, steps_before_tau_0, mcts_se
         mcts_stores[cur_player].search_batch(mcts_searches, mcts_batch_size, state,
                                              cur_player, nets[cur_player], step, device=device)
         movel = game.possible_moves(state, cur_player, step)
-        probs, _ = mcts_stores[cur_player].get_policy_value(state, movel, tau=tau)
+        probs, _ = mcts_stores[cur_player].get_policy_value(state, movel, cur_player, tau=tau)
         action = actionTable.moveTable[np.random.choice(actionTable.AllMoveLength, p=probs)]
         game_history.append((action, probs) if queue is None else (state, step, probs))
         if action not in movel:
